@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase;
 
+use App\Application\Exception\StudioAlreadyExistsException;
 use App\Application\Port\Input\RegisterNewStudio\RegisterNewStudioPort;
 use App\Application\Port\Input\RegisterNewStudio\StudioDTO;
 use App\Application\Port\Output\StudioRepositoryPort;
@@ -28,7 +29,7 @@ class RegisterNewStudioUseCase implements RegisterNewStudioPort
         $studioAggregate = $this->studioRepository->findStudioByName($studioDTO->getName());
 
         if ($studioAggregate !== null) {
-            throw new ApplicationException('Studio already exists');
+            throw new StudioAlreadyExistsException('Studio already exists');
         }
 
         $studioAggregate = StudioAggregate::openNewStudio(

@@ -38,3 +38,17 @@ Content-Type: application/json
     "country": "FR",
     "email": "contact@eiffelstudio.com"
 }
+
+### It tries to register the same studio in Paris and it should return a conflict error = code 409
+
+POST {{url}}/studio
+Content-Type: application/json
+
+{
+  "name": "Tour Eiffel Studio",
+  "street": "Rue de la Tour Eiffel 2",
+  "city": "Paris",
+  "zipCode": "54321",
+  "country": "FR",
+  "email": "contact@eiffelstudio.com"
+}

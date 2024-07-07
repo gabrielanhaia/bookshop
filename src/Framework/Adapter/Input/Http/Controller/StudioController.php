@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Framework\Adapter\Input\Http\Controller;
 
+use App\Application\Exception\StudioAlreadyExistsException;
 use App\Application\Port\Input\RegisterNewStudio\RegisterNewStudioPort;
 use App\Application\Port\Input\RegisterNewStudio\StudioDTO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
 class StudioController extends AbstractController
@@ -32,7 +34,12 @@ class StudioController extends AbstractController
             country: $data['country'],
             email: $data['email']
         );
-        $studioDTO = $this->registerNewStudioPort->registerNewStudio($studioDTO);
+
+        try {
+            $studioDTO = $this->registerNewStudioPort->registerNewStudio($studioDTO);
+        } catch (StudioAlreadyExistsException $exception) {
+            throw new ConflictHttpException($exception->getMessage());
+        }
 
         return new JsonResponse([
             'id' => $studioDTO->getId(),
