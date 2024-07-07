@@ -1,12 +1,40 @@
-## Create a new Studio
-POST {{url}}/studios
+### Create a new Studio in Berlin
+POST {{url}}/studio
 Content-Type: application/json
 
 {
     "name": "Bier Studio",
-    "street": "BierStrasse 2",
+    "street": "Bierstrasse 2",
     "city": "Berlin",
     "zipCode": "54321",
     "country": "DE",
     "email": "contact@bierstudio.com"
+}
+
+### Create a new Studio in Rome
+
+POST {{url}}/studio
+Content-Type: application/json
+
+{
+    "name": "Colesseo Studio",
+    "street": "Via Colosseo 2",
+    "city": "Rome",
+    "zipCode": "54321",
+    "country": "IT",
+    "email": "contact@colesseiostudio.com"
+}
+
+### Create a new Studio in Paris
+
+POST {{url}}/studio
+Content-Type: application/json
+
+{
+    "name": "Tour Eiffel Studio",
+    "street": "Rue de la Tour Eiffel 2",
+    "city": "Paris",
+    "zipCode": "54321",
+    "country": "FR",
+    "email": "contact@eiffelstudio.com"
 }
