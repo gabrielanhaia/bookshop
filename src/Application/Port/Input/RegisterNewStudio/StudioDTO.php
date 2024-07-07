@@ -7,7 +7,7 @@ namespace App\Application\Port\Input\RegisterNewStudio;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class StudioDTO
+class StudioDTO implements \JsonSerializable
 {
     private ?Uuid $id = null;
 
@@ -69,5 +69,18 @@ class StudioDTO
     public function getId(): ?Uuid
     {
         return $this->id;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'street' => $this->street,
+            'city' => $this->city,
+            'zipCode' => $this->zipCode,
+            'country' => $this->country,
+            'email' => $this->email
+        ];
     }
 }

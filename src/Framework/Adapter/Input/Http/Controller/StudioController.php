@@ -41,14 +41,6 @@ class StudioController extends AbstractController
             throw new ConflictHttpException($exception->getMessage());
         }
 
-        return new JsonResponse([
-            'id' => $studioDTO->getId(),
-            'name' => $studioDTO->getName(),
-            'street' => $studioDTO->getStreet(),
-            'city' => $studioDTO->getCity(),
-            'zipCode' => $studioDTO->getZipCode(),
-            'country' => $studioDTO->getCountry(),
-            'email' => $studioDTO->getEmail()
-        ], Response::HTTP_CREATED);
+        return new JsonResponse($studioDTO->jsonSerialize(), Response::HTTP_CREATED);
     }
 }

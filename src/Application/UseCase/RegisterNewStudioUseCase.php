@@ -22,7 +22,7 @@ class RegisterNewStudioUseCase implements RegisterNewStudioPort
     }
 
     /**
-     * @throws ApplicationException if studio already exists
+     * @throws StudioAlreadyExistsException if studio already exists
      */
     public function registerNewStudio(StudioDTO $studioDTO): StudioDTO
     {
