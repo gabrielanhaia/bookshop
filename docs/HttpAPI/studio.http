@@ -1,0 +1,12 @@
+## Create a new Studio
+POST {{url}}/studios
+Content-Type: application/json
+
+{
+    "name": "Bier Studio",
+    "street": "BierStrasse 2",
+    "city": "Berlin",
+    "zipCode": "54321",
+    "country": "DE",
+    "email": "contact@bierstudio.com"
+}
