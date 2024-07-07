@@ -15,8 +15,8 @@ class RoomEntity
 
     private function __construct(
         private readonly Uuid     $id,
+        private readonly Uuid     $studioId,
         private readonly string   $name,
-        private readonly string   $description,
         private readonly Capacity $capacity,
         ?ArrayCollection          $equipments = null
     )
@@ -29,24 +29,24 @@ class RoomEntity
     }
 
     public static function registerNewRoom(
+        Uuid            $studioId,
         string          $name,
-        string          $description,
         Capacity        $capacity,
         ArrayCollection $equipments = null
     ): self
     {
-        return new self(Uuid::v7(), $name, $description, $capacity, $equipments);
+        return new self(Uuid::v7(), $studioId, $name, $capacity, $equipments);
     }
 
     public static function createWithId(
         Uuid            $id,
+        Uuid            $studioId,
         string          $name,
-        string          $description,
         Capacity        $capacity,
         ArrayCollection $equipments = null
     ): self
     {
-        return new self($id, $name, $description, $capacity, $equipments);
+        return new self($id, $studioId, $name, $capacity, $equipments);
     }
 
     public function getId(): Uuid
@@ -57,11 +57,6 @@ class RoomEntity
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getDescription(): string
-    {
-        return $this->description;
     }
 
     public function getCapacity(): Capacity
@@ -80,5 +75,10 @@ class RoomEntity
     public function getEquipments(): ArrayCollection
     {
         return $this->equipments;
+    }
+
+    public function getStudioId(): Uuid
+    {
+        return $this->studioId;
     }
 }

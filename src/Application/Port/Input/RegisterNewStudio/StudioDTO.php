@@ -5,19 +5,29 @@ declare(strict_types=1);
 namespace App\Application\Port\Input\RegisterNewStudio;
 
 use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class StudioDTO
 {
+    private ?Uuid $id = null;
+
+    #[Assert\Country]
+    private string $country;
+
+    #[Assert\Email]
+    private string $email;
+
     public function __construct(
-        public ?Uuid            $id,
         private readonly string $name,
         private readonly string $street,
         private readonly string $city,
         private readonly string $zipCode,
-        private readonly string $country,
-        private readonly string $email,
+        string                  $country,
+        string                  $email,
     )
     {
+        $this->country = $country;
+        $this->email = $email;
     }
 
     public function setId(Uuid $id): self

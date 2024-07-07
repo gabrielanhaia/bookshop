@@ -2,7 +2,7 @@
 
 namespace App\Domain\Booking\Model;
 
-use App\Domain\Shared\Model\ValueObject\Email;
+use App\Shared\Model\ValueObject\Email;
 use Symfony\Component\Uid\Uuid;
 
 class UserEntity

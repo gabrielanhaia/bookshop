@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Studio\Model\ValueObject;
+namespace App\Shared\Model\ValueObject;
 
 enum EquipmentType
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Studio\Model;
 
-use App\Domain\Shared\Model\ValueObject\Email;
 use App\Domain\Studio\Model\ValueObject\Address;
+use App\Shared\Model\ValueObject\Email;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Uid\Uuid;
 
@@ -17,18 +17,19 @@ class StudioAggregate
     private function __construct(
         private readonly Uuid    $id,
         private readonly string  $name,
-        private readonly Email  $email,
+        private readonly Email   $email,
         private readonly Address $address,
         ?ArrayCollection         $rooms = null
     )
     {
         $this->rooms = new ArrayCollection();
-        foreach ($rooms as $room) {
+
+        foreach ($rooms ?? [] as $room) {
             $this->addRoom($room);
         }
     }
 
-    public static function create(
+    public static function openNewStudio(
         string          $name,
         Email           $email,
         Address         $address,

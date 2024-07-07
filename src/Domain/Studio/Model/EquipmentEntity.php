@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Studio\Model;
 
-use App\Domain\Studio\Model\ValueObject\EquipmentType;
+use App\Shared\Model\ValueObject\EquipmentType;
 use Symfony\Component\Uid\Uuid;
 
 class EquipmentEntity
