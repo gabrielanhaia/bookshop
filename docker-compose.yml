@@ -31,8 +31,12 @@ services:
     environment:
       MYSQL_DATABASE: symfony
       MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: symfony_user
+      MYSQL_PASSWORD: symfony_pass
+      MYSQL_ROOT_HOST: '%'
     volumes:
       - db_data:/var/lib/mysql
+      - ./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     networks:
