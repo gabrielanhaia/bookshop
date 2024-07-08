@@ -1,5 +1,5 @@
-# PHP and Composer
-FROM php:8.1.28-fpm
+# Stage 1: PHP and Composer
+FROM php:8.1.28-fpm AS php
 
 # Set working directory
 WORKDIR /var/www/html
@@ -44,3 +44,13 @@ USER www
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
+
+# Stage 2: Nginx
+FROM nginx:alpine AS nginx
+
+COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/nginx/conf.d /etc/nginx/conf.d
+COPY . /var/www/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,5 +1,5 @@
 ### Create a new Studio in Berlin
-POST {{url}}/studio
+POST {{url}}/studios
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 ### Create a new Studio in Rome
 
-POST {{url}}/studio
+POST {{url}}/studios
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 ### Create a new Studio in Paris
 
-POST {{url}}/studio
+POST {{url}}/studios
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 
 ### It tries to register the same studio in Paris and it should return a conflict error = code 409
 
-POST {{url}}/studio
+POST {{url}}/studios
 Content-Type: application/json
 
 {
@@ -52,3 +52,6 @@ Content-Type: application/json
   "country": "FR",
   "email": "contact@eiffelstudio.com"
 }
+
+### List Studios
+GET {{url}}/studios

@@ -3,7 +3,7 @@
 namespace App\Framework\Adapter\Input\CLI;
 
 use App\Application\Port\Input\RegisterNewStudio\RegisterNewStudioPort;
-use App\Application\Port\Input\RegisterNewStudio\StudioDTO;
+use App\Application\Port\Shared\StudioDTO;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -54,13 +54,13 @@ class RegisterStudioCommand extends Command
         $country = $input->getOption('country');
         $email = $input->getOption('email');
 
-        $studioDTO = new StudioDTO(
-            name: $name,
-            street: $street,
-            city: $city,
-            zipCode: $zipCode,
-            country: $country,
-            email: $email
+        $studioDTO = StudioDTO::create(
+            $name,
+            $street,
+            $city,
+            $zipCode,
+            $country,
+            $email
         );
         $this->validate($studioDTO);
 

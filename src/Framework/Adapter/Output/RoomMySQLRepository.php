@@ -5,7 +5,7 @@ namespace App\Framework\Adapter\Output;
 use App\Application\Port\Output\RoomRepositoryPort;
 use App\Domain\Studio\Model\RoomEntity;
 
-class RoomFileRepository implements RoomRepositoryPort
+class RoomMySQLRepository implements RoomRepositoryPort
 {
 
     public function saveRoom(RoomEntity $room): RoomEntity

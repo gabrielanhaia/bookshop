@@ -5,28 +5,32 @@ declare(strict_types=1);
 namespace App\Framework\Adapter\Input\Http\Controller;
 
 use App\Application\Exception\StudioAlreadyExistsException;
+use App\Application\Port\Input\GetStudios\GetStudiosPort;
 use App\Application\Port\Input\RegisterNewStudio\RegisterNewStudioPort;
-use App\Application\Port\Input\RegisterNewStudio\StudioDTO;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Application\Port\Shared\StudioDTO;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class StudioController extends AbstractController
 {
     public function __construct(
-        private readonly RegisterNewStudioPort $registerNewStudioPort
+        private readonly RegisterNewStudioPort $registerNewStudioPort,
+        private readonly GetStudiosPort        $getStudiosPort,
+        ValidatorInterface                     $validator,
     )
     {
+        parent::__construct($validator);
     }
 
-    #[Route('/studio', name: 'studio', methods: [Request::METHOD_POST])]
+    #[Route('/studios', name: 'create_studio', methods: [Request::METHOD_POST])]
     public function handle(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
-        $studioDTO = new StudioDTO(
+        $studioDTO = StudioDTO::create(
             name: $data['name'],
             street: $data['street'],
             city: $data['city'],
@@ -34,6 +38,7 @@ class StudioController extends AbstractController
             country: $data['country'],
             email: $data['email']
         );
+        $this->validate($studioDTO);
 
         try {
             $studioDTO = $this->registerNewStudioPort->registerNewStudio($studioDTO);
@@ -42,5 +47,13 @@ class StudioController extends AbstractController
         }
 
         return new JsonResponse($studioDTO->jsonSerialize(), Response::HTTP_CREATED);
+    }
+
+    #[Route('/studios', name: 'get_studios', methods: [Request::METHOD_GET])]
+    public function getStudios(): Response
+    {
+        $studios = $this->getStudiosPort->getStudios();
+
+        return new JsonResponse($studios, Response::HTTP_OK);
     }
 }

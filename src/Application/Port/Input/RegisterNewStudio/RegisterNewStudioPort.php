@@ -3,6 +3,7 @@
 namespace App\Application\Port\Input\RegisterNewStudio;
 
 use App\Application\Exception\StudioAlreadyExistsException;
+use App\Application\Port\Shared\StudioDTO;
 
 interface RegisterNewStudioPort
 {

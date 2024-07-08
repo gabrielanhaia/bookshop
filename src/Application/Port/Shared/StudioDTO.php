@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Port\Input\RegisterNewStudio;
+namespace App\Application\Port\Shared;
 
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,7 +17,8 @@ class StudioDTO implements \JsonSerializable
     #[Assert\Email]
     private string $email;
 
-    public function __construct(
+    private function __construct(
+        ?Uuid                   $id,
         private readonly string $name,
         private readonly string $street,
         private readonly string $city,
@@ -26,8 +27,34 @@ class StudioDTO implements \JsonSerializable
         string                  $email,
     )
     {
+        $this->id = $id;
         $this->country = $country;
         $this->email = $email;
+    }
+
+    public static function create(
+        string $name,
+        string $street,
+        string $city,
+        string $zipCode,
+        string $country,
+        string $email
+    ): self
+    {
+        return new self(null, $name, $street, $city, $zipCode, $country, $email);
+    }
+
+    public static function createWithId(
+        Uuid   $id,
+        string $name,
+        string $street,
+        string $city,
+        string $zipCode,
+        string $country,
+        string $email
+    ): self
+    {
+        return new self($id, $name, $street, $city, $zipCode, $country, $email);
     }
 
     public function setId(Uuid $id): self

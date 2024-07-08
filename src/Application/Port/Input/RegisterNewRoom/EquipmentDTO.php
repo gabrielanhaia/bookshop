@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Port\Input\RegisterNewStudio;
+namespace App\Application\Port\Input\RegisterNewRoom;
 
 use App\Shared\Model\ValueObject\EquipmentType;
 

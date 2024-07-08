@@ -3,6 +3,8 @@
 namespace App\Framework\Adapter\Output;
 
 use App\Application\Port\Output\StudioRepositoryPort;
+use App\Application\Port\Shared\StudioDTO;
+use App\Application\Port\Shared\StudioDTOCollection;
 use App\Domain\Studio\Model\StudioAggregate;
 use App\Domain\Studio\Model\ValueObject\Address;
 use App\Shared\Model\ValueObject\Email;
@@ -10,7 +12,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Symfony\Component\Uid\Uuid;
 
-class StudioFileRepository implements StudioRepositoryPort
+class StudioMySQLRepository implements StudioRepositoryPort
 {
     public function __construct(
         private readonly Connection $connection
@@ -66,5 +68,29 @@ class StudioFileRepository implements StudioRepositoryPort
     public function findStudioById(Uuid $getStudioId): ?StudioAggregate
     {
         // TODO: Implement findStudioByNameId() method.
+    }
+
+    public function getAllStudios(): StudioDTOCollection
+    {
+        $query = 'SELECT * FROM studios';
+        $stmt = $this->connection->prepare($query);
+        $stmtResult = $stmt->executeQuery();
+
+        $studios = new StudioDTOCollection();
+        while ($result = $stmtResult->fetchAssociative()) {
+            $studios->add(
+                StudioDTO::createWithId(
+                    id: Uuid::fromString($result['id']),
+                    name: $result['name'],
+                    street: $result['street'],
+                    city: $result['city'],
+                    zipCode: $result['zip_code'],
+                    country: $result['country'],
+                    email: $result['email']
+                )
+            );
+        }
+
+        return $studios;
     }
 }

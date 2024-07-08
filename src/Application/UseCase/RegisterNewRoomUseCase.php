@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase;
 
+use App\Application\Port\Input\RegisterNewRoom\EquipmentDTO;
 use App\Application\Port\Input\RegisterNewRoom\RegisterNewRoomPort;
 use App\Application\Port\Input\RegisterNewRoom\RoomDTO;
-use App\Application\Port\Input\RegisterNewStudio\EquipmentDTO;
 use App\Application\Port\Output\RoomRepositoryPort;
 use App\Application\Port\Output\StudioRepositoryPort;
 use App\Domain\Studio\Model\EquipmentEntity;
