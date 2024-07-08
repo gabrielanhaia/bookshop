@@ -13,36 +13,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class StudioAggregateTest extends AbstractTestCase
 {
-    private const STUDIO_NAME = 'Studio 1';
-
-    private const EMAIL = 'test@studio.com';
-
-    private const ADDRESS_STREET = 'Studio 1 Street';
-
-    private const ADDRESS_CITY = 'Studio 1 City';
-
-    private const ADDRESS_ZIP_CODE = 'Studio 1 Zip Code';
-
-    private const ADDRESS_COUNTRY = 'Studio 1 Country';
-
-    private const ROOM_NAME = 'Room 1';
-
-    private const ROOM_CAPACITY = 10;
-
-    private const EQUIPMENT_NAME = 'Equipment 1';
-
-    private const EQUIPMENT_SERIAL_NUMBER = '123456';
-
     public function testOpenNewStudios(): void
     {
         $studio = $this->createStudio();
 
         $this->assertEquals(self::STUDIO_NAME, $studio->getName());
-        $this->assertEquals(self::EMAIL, $studio->getEmail()->getValue());
-        $this->assertEquals(self::ADDRESS_STREET, $studio->getAddress()->getStreet());
-        $this->assertEquals(self::ADDRESS_CITY, $studio->getAddress()->getCity());
-        $this->assertEquals(self::ADDRESS_ZIP_CODE, $studio->getAddress()->getZipCode());
-        $this->assertEquals(self::ADDRESS_COUNTRY, $studio->getAddress()->getCountry());
+        $this->assertEquals(self::STUDIO_EMAIL, $studio->getEmail()->getValue());
+        $this->assertEquals(self::STUDIO_STREET, $studio->getAddress()->getStreet());
+        $this->assertEquals(self::STUDIO_CITY, $studio->getAddress()->getCity());
+        $this->assertEquals(self::STUDIO_ZIP_CODE, $studio->getAddress()->getZipCode());
+        $this->assertEquals(self::STUDIO_COUNTRY, $studio->getAddress()->getCountry());
     }
 
     public function testRegisterNewRoomToStudio(): void
@@ -73,12 +53,12 @@ class StudioAggregateTest extends AbstractTestCase
     {
         return StudioAggregate::openNewStudio(
             name: self::STUDIO_NAME,
-            email: new Email(self::EMAIL),
+            email: new Email(self::STUDIO_EMAIL),
             address: new Address(
-                street: self::ADDRESS_STREET,
-                city: self::ADDRESS_CITY,
-                zipCode: self::ADDRESS_ZIP_CODE,
-                country: self::ADDRESS_COUNTRY
+                street: self::STUDIO_STREET,
+                city: self::STUDIO_CITY,
+                zipCode: self::STUDIO_ZIP_CODE,
+                country: self::STUDIO_COUNTRY
             ),
         );
     }
