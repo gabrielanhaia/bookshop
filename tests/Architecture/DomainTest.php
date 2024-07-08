@@ -7,10 +7,9 @@ namespace App\Tests\Architecture;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Uid\Uuid;
 
-class DomainTest extends TestCase
+class DomainTest
 {
     public function testDomainDoesNotDependOnOtherLayers(): Rule
     {

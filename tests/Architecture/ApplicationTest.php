@@ -2,13 +2,12 @@
 
 namespace App\Tests\Architecture;
 
-use PHPUnit\Framework\TestCase;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
 use Symfony\Component\Uid\Uuid;
 
-class ApplicationTest extends TestCase
+class ApplicationTest
 {
     public function testApplicationDoesNotDependOnFrameworkLayer(): Rule
     {

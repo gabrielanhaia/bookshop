@@ -5,9 +5,8 @@ namespace App\Tests\Architecture;
 use PHPat\Selector\Selector;
 use PHPat\Test\Builder\Rule;
 use PHPat\Test\PHPat;
-use PHPUnit\Framework\TestCase;
 
-class FrameworkTest extends TestCase
+class FrameworkTest
 {
     public function testOutputAdaptersShouldImplementPorts(): Rule
     {
