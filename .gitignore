@@ -78,3 +78,7 @@
 /.web-server-pid
 
 .idea
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

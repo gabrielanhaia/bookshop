@@ -1,0 +1,20 @@
+parameters:
+    phpat:
+        ignore_doc_comments: true
+        ignore_built_in_classes: true
+    level: 5
+    paths:
+        - src/
+        - tests/
+
+services:
+    -
+        class: App\Tests\Architecture\DomainTest
+        tags: [phpat.test]
+
+    -
+        class: App\Tests\Architecture\ApplicationTest
+        tags: [phpat.test]
+    -
+        class: App\Tests\Architecture\FrameworkTest
+        tags: [phpat.test]

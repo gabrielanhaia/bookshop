@@ -67,7 +67,7 @@ class StudioMySQLRepository implements StudioRepositoryPort
 
     public function findStudioById(Uuid $getStudioId): ?StudioAggregate
     {
-        // TODO: Implement findStudioByNameId() method.
+        return null;
     }
 
     public function getAllStudios(): StudioDTOCollection
