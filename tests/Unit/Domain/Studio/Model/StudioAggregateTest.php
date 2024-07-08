@@ -8,10 +8,10 @@ use App\Domain\Studio\Model\ValueObject\Address;
 use App\Domain\Studio\Model\ValueObject\Capacity;
 use App\Shared\Model\ValueObject\Email;
 use App\Shared\Model\ValueObject\EquipmentType;
+use App\Tests\Unit\AbstractTestCase;
 use Doctrine\Common\Collections\ArrayCollection;
-use PHPUnit\Framework\TestCase;
 
-class StudioAggregateTest extends TestCase
+class StudioAggregateTest extends AbstractTestCase
 {
     private const STUDIO_NAME = 'Studio 1';
 
