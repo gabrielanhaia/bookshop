@@ -4,11 +4,8 @@ namespace App\Tests\Unit\Domain\Application\UseCase;
 
 use App\Application\Exception\StudioAlreadyExistsException;
 use App\Application\Port\Output\StudioRepositoryPort;
-use App\Application\Port\Shared\StudioDTO;
 use App\Application\UseCase\RegisterNewStudioUseCase;
 use App\Domain\Studio\Model\StudioAggregate;
-use App\Domain\Studio\Model\ValueObject\Address;
-use App\Shared\Model\ValueObject\Email;
 use App\Tests\Unit\AbstractTestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -16,18 +13,6 @@ use Symfony\Component\Uid\Uuid;
 
 class RegisterNewStudioUseCaseTest extends AbstractTestCase
 {
-    private const STUDIO_NAME = 'Studio Name';
-
-    private const STUDIO_EMAIL = 'test@studio.com';
-
-    private const STUDIO_STREET = 'Studio Street';
-
-    private const STUDIO_CITY = 'Studio City';
-
-    private const STUDIO_ZIP_CODE = 'Studio Zip Code';
-
-    private const STUDIO_COUNTRY = 'Studio Country';
-
     private StudioRepositoryPort|ObjectProphecy|null $studioRepositoryPort;
 
     protected function setUp(): void
@@ -46,7 +31,7 @@ class RegisterNewStudioUseCaseTest extends AbstractTestCase
             ->shouldBeCalledOnce()
             ->willReturn($this->createStudioAggregate());
 
-        $useCase = $this->buildUseCase();
+        $useCase = $this->createUseCase();
         $useCase->registerNewStudio($this->createStudioDTO());
     }
 
@@ -73,38 +58,12 @@ class RegisterNewStudioUseCaseTest extends AbstractTestCase
             ->shouldBeCalledOnce()
             ->willReturn($studioAggregate);
 
-        $useCase = $this->buildUseCase();
+        $useCase = $this->createUseCase();
         $studioDTO = $useCase->registerNewStudio($this->createStudioDTO());
         $this->assertInstanceOf(Uuid::class, $studioDTO->getId());
     }
 
-    private function createStudioDTO(): StudioDTO
-    {
-        return StudioDTO::create(
-            name: self::STUDIO_NAME,
-            street: self::STUDIO_STREET,
-            city: self::STUDIO_CITY,
-            zipCode: self::STUDIO_ZIP_CODE,
-            country: self::STUDIO_COUNTRY,
-            email: self::STUDIO_EMAIL
-        );
-    }
-
-    private function createStudioAggregate(): StudioAggregate
-    {
-        return StudioAggregate::openNewStudio(
-            name: self::STUDIO_NAME,
-            email: new Email(self::STUDIO_EMAIL),
-            address: new Address(
-                street: self::STUDIO_STREET,
-                city: self::STUDIO_CITY,
-                zipCode: self::STUDIO_ZIP_CODE,
-                country: self::STUDIO_COUNTRY
-            ),
-        );
-    }
-
-    private function buildUseCase(): RegisterNewStudioUseCase
+    private function createUseCase(): RegisterNewStudioUseCase
     {
         return new RegisterNewStudioUseCase($this->studioRepositoryPort->reveal());
     }
