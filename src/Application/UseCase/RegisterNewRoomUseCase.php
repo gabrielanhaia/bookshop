@@ -11,6 +11,7 @@ use App\Application\Port\Output\RoomRepositoryPort;
 use App\Application\Port\Output\StudioRepositoryPort;
 use App\Domain\Studio\Model\EquipmentEntity;
 use App\Domain\Studio\Model\RoomEntity;
+use App\Domain\Studio\Model\StudioAggregate;
 use App\Domain\Studio\Model\ValueObject\Capacity;
 use App\Shared\Exception\ApplicationException;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -29,30 +30,38 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
      */
     public function registerNewRoom(RoomDTO $roomDTO): RoomDTO
     {
-        $this->validateRoomAndStudio($roomDTO);
+        $studioAggregate = $this->getStudio($roomDTO);
+        $this->validateDuplicatedRooms($roomDTO);
 
-        $roomAggregate = RoomEntity::registerNewRoom(
-            studioId: $roomDTO->getStudioId(),
+        $room = $studioAggregate->registerNewRoom(
             name: $roomDTO->getName(),
             capacity: Capacity::create($roomDTO->getCapacity()),
             equipments: $this->formatEquipments($roomDTO),
         );
 
-        $roomAggregate = $this->roomRepositoryPort->saveRoom($roomAggregate);
+        $room = $this->roomRepositoryPort->saveRoom($room);
 
-        return $roomDTO->setId($roomAggregate->getId());
+        return $roomDTO->setId($room->getId());
     }
 
     /**
-     * @throws ApplicationException if studio not found or room already exists
+     * @throws ApplicationException If studio not found
      */
-    private function validateRoomAndStudio(RoomDTO $roomDTO): void
+    private function getStudio(RoomDTO $roomDTO): StudioAggregate
     {
-        $studio = $this->studioRepositoryPort->findStudioById($roomDTO->getStudioId());
-        if ($studio === null) {
+        $studioAggregate = $this->studioRepositoryPort->findStudioById($roomDTO->getStudioId());
+        if ($studioAggregate === null) {
             throw new ApplicationException('Studio not found');
         }
 
+        return $studioAggregate;
+    }
+
+    /**
+     * @throws ApplicationException If room already exists
+     */
+    private function validateDuplicatedRooms(RoomDTO $roomDTO): void
+    {
         $room = $this->roomRepositoryPort->findRoomByName($roomDTO->getName());
         if ($room !== null) {
             throw new ApplicationException('Room already exists');

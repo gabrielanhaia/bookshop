@@ -28,7 +28,7 @@ class RoomEntity
         }
     }
 
-    public static function registerNewRoom(
+    public static function create(
         Uuid            $studioId,
         string          $name,
         Capacity        $capacity,

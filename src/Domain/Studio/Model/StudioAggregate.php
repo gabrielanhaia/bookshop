@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Studio\Model;
 
 use App\Domain\Studio\Model\ValueObject\Address;
+use App\Domain\Studio\Model\ValueObject\Capacity;
 use App\Shared\Model\ValueObject\Email;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Uid\Uuid;
@@ -32,11 +33,10 @@ class StudioAggregate
     public static function openNewStudio(
         string          $name,
         Email           $email,
-        Address         $address,
-        ArrayCollection $rooms = null
+        Address         $address
     ): self
     {
-        return new self(Uuid::v7(), $name, $email, $address, $rooms);
+        return new self(Uuid::v7(), $name, $email, $address);
     }
 
     public static function createWithId(
@@ -48,6 +48,18 @@ class StudioAggregate
     ): self
     {
         return new self($id, $name, $email, $address, $rooms);
+    }
+
+    public function registerNewRoom(
+        string $name,
+        Capacity $capacity,
+        ArrayCollection $equipments = null
+    ): RoomEntity
+    {
+        $room = RoomEntity::create($this->id, $name, $capacity, $equipments);
+        $this->addRoom($room);
+
+        return $room;
     }
 
     public function getId(): Uuid
