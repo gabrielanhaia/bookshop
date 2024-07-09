@@ -26,8 +26,7 @@ class RegisterStudioCommand extends Command
     public function __construct(
         private readonly ValidatorInterface    $validator,
         private readonly RegisterNewStudioPort $registerNewStudioPort
-    )
-    {
+    ) {
         parent::__construct();
     }
 

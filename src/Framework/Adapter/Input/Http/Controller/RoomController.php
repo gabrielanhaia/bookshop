@@ -19,8 +19,7 @@ class RoomController extends AbstractController
     public function __construct(
         private readonly RegisterNewRoomPort $registerNewRoomPort,
         ValidatorInterface                   $validator,
-    )
-    {
+    ) {
         parent::__construct($validator);
     }
 

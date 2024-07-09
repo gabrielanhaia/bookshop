@@ -10,8 +10,7 @@ class RoomMySQLRepository implements RoomRepositoryPort
 {
     public function __construct(
         private readonly Connection $connection
-    )
-    {
+    ) {
     }
 
     public function saveRoom(RoomEntity $room): RoomEntity

@@ -19,8 +19,7 @@ class RoomEntity
         private readonly string   $name,
         private readonly Capacity $capacity,
         ?ArrayCollection          $equipments = null
-    )
-    {
+    ) {
         $this->equipments = new ArrayCollection();
 
         foreach ($equipments as $equipment) {
@@ -33,8 +32,7 @@ class RoomEntity
         string          $name,
         Capacity        $capacity,
         ArrayCollection $equipments = null
-    ): self
-    {
+    ): self {
         return new self(Uuid::v7(), $studioId, $name, $capacity, $equipments);
     }
 
@@ -44,8 +42,7 @@ class RoomEntity
         string          $name,
         Capacity        $capacity,
         ArrayCollection $equipments = null
-    ): self
-    {
+    ): self {
         return new self($id, $studioId, $name, $capacity, $equipments);
     }
 

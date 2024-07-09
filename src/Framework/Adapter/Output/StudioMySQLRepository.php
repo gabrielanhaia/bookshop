@@ -16,8 +16,7 @@ class StudioMySQLRepository implements StudioRepositoryPort
 {
     public function __construct(
         private readonly Connection $connection
-    )
-    {
+    ) {
     }
 
     /**

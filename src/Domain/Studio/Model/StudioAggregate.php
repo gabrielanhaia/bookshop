@@ -22,8 +22,7 @@ class StudioAggregate
         private readonly Email   $email,
         private readonly Address $address,
         ?ArrayCollection         $rooms = null
-    )
-    {
+    ) {
         $this->rooms = new ArrayCollection();
 
         foreach ($rooms ?? [] as $room) {
@@ -35,8 +34,7 @@ class StudioAggregate
         string          $name,
         Email           $email,
         Address         $address
-    ): self
-    {
+    ): self {
         return new self(Uuid::v7(), $name, $email, $address);
     }
 
@@ -46,8 +44,7 @@ class StudioAggregate
         Email           $email,
         Address         $address,
         ArrayCollection $rooms = null
-    ): self
-    {
+    ): self {
         return new self($id, $name, $email, $address, $rooms);
     }
 
@@ -58,8 +55,7 @@ class StudioAggregate
         string $name,
         Capacity $capacity,
         ArrayCollection $equipments = null
-    ): RoomEntity
-    {
+    ): RoomEntity {
         if ($this->roomExists($name)) {
             throw new DomainException('Room already exists');
         }
@@ -72,7 +68,7 @@ class StudioAggregate
 
     private function roomExists(string $name): bool
     {
-        return $this->rooms->filter(fn(RoomEntity $room) => $room->getName() === $name)->count() > 0;
+        return $this->rooms->filter(fn (RoomEntity $room) => $room->getName() === $name)->count() > 0;
     }
 
     public function getId(): Uuid

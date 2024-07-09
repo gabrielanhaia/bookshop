@@ -2,7 +2,6 @@
 
 namespace App\Framework\Exception;
 
-
 use Throwable;
 
 class ValidatorException extends \Symfony\Component\Validator\Exception\ValidatorException
@@ -14,8 +13,7 @@ class ValidatorException extends \Symfony\Component\Validator\Exception\Validato
         array $violations = [],
         int        $code = 0,
         ?Throwable $previous = null
-    )
-    {
+    ) {
         $this->violations = $violations;
         parent::__construct($message, $code, $previous);
     }

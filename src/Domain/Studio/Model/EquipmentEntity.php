@@ -14,16 +14,14 @@ class EquipmentEntity
         private readonly string        $name,
         private readonly EquipmentType $type,
         private readonly string        $serialNumber,
-    )
-    {
+    ) {
     }
 
     public static function create(
         string $name,
         EquipmentType $type,
         string $serialNumber
-    ): self
-    {
+    ): self {
         return new self(Uuid::v7(), $name, $type, $serialNumber);
     }
 
@@ -32,8 +30,7 @@ class EquipmentEntity
         string $name,
         EquipmentType $type,
         string $serialNumber
-    ): self
-    {
+    ): self {
         return new self($id, $name, $type, $serialNumber);
     }
 

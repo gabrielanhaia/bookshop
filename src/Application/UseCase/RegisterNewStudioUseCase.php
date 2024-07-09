@@ -15,8 +15,7 @@ class RegisterNewStudioUseCase implements RegisterNewStudioPort
     public function __construct(
         private readonly StudioRepositoryPort $studioRepository,
         private readonly StudioFactory $studioFactory
-    )
-    {
+    ) {
     }
 
     /**

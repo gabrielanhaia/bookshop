@@ -12,8 +12,7 @@ class AbstractController extends \Symfony\Bundle\FrameworkBundle\Controller\Abst
 {
     public function __construct(
         protected readonly ValidatorInterface $validator
-    )
-    {
+    ) {
     }
 
     protected function validate(object $requestData): void

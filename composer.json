@@ -103,6 +103,7 @@
         "behat/behat": "^3.8",
         "coduo/php-matcher": "^6.0",
         "friends-of-behat/symfony-extension": "^2.6",
+        "friendsofphp/php-cs-fixer": "^3.59",
         "guzzlehttp/guzzle": "^7.0",
         "phpat/phpat": "^0.10.18",
         "phpstan/extension-installer": "^1.4",

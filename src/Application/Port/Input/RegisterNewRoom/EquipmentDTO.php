@@ -10,8 +10,7 @@ class EquipmentDTO
         private readonly string $name,
         private readonly EquipmentType $type,
         private readonly string $serialNumber,
-    )
-    {
+    ) {
     }
 
     public function getName(): string

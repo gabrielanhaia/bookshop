@@ -25,8 +25,7 @@ class StudioDTO implements \JsonSerializable
         private readonly string $zipCode,
         string                  $country,
         string                  $email,
-    )
-    {
+    ) {
         $this->id = $id;
         $this->country = $country;
         $this->email = $email;
@@ -39,8 +38,7 @@ class StudioDTO implements \JsonSerializable
         string $zipCode,
         string $country,
         string $email
-    ): self
-    {
+    ): self {
         return new self(null, $name, $street, $city, $zipCode, $country, $email);
     }
 
@@ -52,8 +50,7 @@ class StudioDTO implements \JsonSerializable
         string $zipCode,
         string $country,
         string $email
-    ): self
-    {
+    ): self {
         return new self($id, $name, $street, $city, $zipCode, $country, $email);
     }
 

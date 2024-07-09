@@ -6,5 +6,4 @@ use App\Shared\Exception\ApplicationException;
 
 class StudioAlreadyExistsException extends ApplicationException
 {
-
 }

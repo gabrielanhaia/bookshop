@@ -21,8 +21,7 @@ class StudioController extends AbstractController
         private readonly RegisterNewStudioPort $registerNewStudioPort,
         private readonly GetStudiosPort        $getStudiosPort,
         ValidatorInterface                     $validator,
-    )
-    {
+    ) {
         parent::__construct($validator);
     }
 

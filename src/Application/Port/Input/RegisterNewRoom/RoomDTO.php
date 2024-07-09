@@ -14,8 +14,7 @@ class RoomDTO implements \JsonSerializable
         private readonly string $name,
         private readonly int $capacity,
         private readonly ArrayCollection $equipments,
-    )
-    {
+    ) {
     }
 
     public function setId(Uuid $getId): self
