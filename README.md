@@ -1,5 +1,8 @@
 # Dancing Studios
 
+![image](https://github.com/gabrielanhaia/studio-renting/assets/15172908/585d9c50-2ceb-4c10-aede-12150bab4607)
+
+
 ## How to Start and Test the Project
 
 ### Requirements
