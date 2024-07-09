@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Domain\Application\UseCase;
+namespace App\Tests\Unit\Application\UseCase;
 
 use App\Application\Port\Output\StudioRepositoryPort;
 use App\Application\Port\Shared\StudioDTOCollection;
