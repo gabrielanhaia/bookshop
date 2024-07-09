@@ -28,7 +28,7 @@ make enter-container
 
 There are some files inside `./docs/HttpAPI/` that you can use the .http files to test the API via REST Client in IntelliJ IDEA, VS Code, etc. 
 
-## Running Tests
+## Running Tests (I recommend running all the make commands inside the container to avoid incompatibilities in different environments)
 
 You can run the tests as needed:
 
