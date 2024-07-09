@@ -100,7 +100,7 @@ This project was inspired by a relative's work in opening and managing dance stu
 - **Studio**: Represents a dance studio with details like name, address, and contact info.
 - **Room**: Represents a room within a studio, including its name, capacity, and equipment.
 - **Equipment**: Represents items in a room, like sound systems and mirrors.
-- **Appointment**: Represents bookings or events scheduled in a room.
+- **Appointment**: Represents bookings or events scheduled in a room. (Not implemented
 
 ## Implementation
 
