@@ -10,9 +10,9 @@ class RoomDTO implements \JsonSerializable
     private ?Uuid $id = null;
 
     public function __construct(
-        private readonly Uuid $studioId,
-        private readonly string $name,
-        private readonly int $capacity,
+        private readonly Uuid            $studioId,
+        private readonly string          $name,
+        private readonly int             $capacity,
         private readonly ArrayCollection $equipments,
     ) {
     }

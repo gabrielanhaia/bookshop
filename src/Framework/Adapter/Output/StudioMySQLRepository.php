@@ -61,7 +61,6 @@ class StudioMySQLRepository implements StudioRepositoryPort
                 country: $result['country']
             )
         );
-
     }
 
     public function findStudioById(Uuid $studioId): ?StudioAggregate

@@ -104,7 +104,7 @@ class StudioDTO implements \JsonSerializable
             'city' => $this->city,
             'zipCode' => $this->zipCode,
             'country' => $this->country,
-            'email' => $this->email
+            'email' => $this->email,
         ];
     }
 }

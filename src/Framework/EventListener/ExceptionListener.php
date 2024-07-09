@@ -14,7 +14,7 @@ class ExceptionListener
     {
         $exception = $event->getThrowable();
         $response = new JsonResponse([
-            'error' => $exception->getMessage()
+            'error' => $exception->getMessage(),
         ]);
 
         if ($exception instanceof HttpExceptionInterface) {
@@ -22,7 +22,7 @@ class ExceptionListener
         } elseif ($exception instanceof ValidatorException) {
             $response = new JsonResponse([
                 'error' => 'Validation error',
-                'violations' => $exception->getViolations()
+                'violations' => $exception->getViolations(),
             ], Response::HTTP_BAD_REQUEST);
         } else {
             $response->setStatusCode(JsonResponse::HTTP_INTERNAL_SERVER_ERROR);

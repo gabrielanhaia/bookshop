@@ -9,7 +9,7 @@ class ValidatorException extends \Symfony\Component\Validator\Exception\Validato
     private array $violations;
 
     public function __construct(
-        string     $message = "",
+        string     $message = '',
         array $violations = [],
         int        $code = 0,
         ?Throwable $previous = null
