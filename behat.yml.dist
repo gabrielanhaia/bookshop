@@ -1,0 +1,15 @@
+default:
+    suites:
+        default:
+            contexts:
+                - App\Context\FeatureContext
+                - App\Context\RestContext
+                - App\Context\DatabaseContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            bootstrap: features/bootstrap/bootstrap.php
+            kernel:
+                class: App\Kernel
+                environment: test
+                debug: true

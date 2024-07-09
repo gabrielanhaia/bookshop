@@ -30,6 +30,4 @@ class EquipmentFactory
             serialNumber: $equipmentDTO->getSerialNumber()
         );
     }
-
-
 }

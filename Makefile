@@ -9,6 +9,7 @@ help:
 	@echo "\033[0;31m  enter-container\033[0m  Enter the docker container"
 	@echo "\033[0;31m  test-unit\033[0m        Run the unit tests"
 	@echo "\033[0;31m  test-architecture\033[0m Run the architecture tests"
+	@echo "\033[0;31m  test-behat\033[0m       Run the behat tests"
 	@echo "\033[0;31m  test-all\033[0m         Run all the tests"
 	@echo "\033[0;31m  install-deps\033[0m     Install the dependencies"
 	@echo "\033[0;31m  clear\033[0m            Clear the cache"
@@ -19,6 +20,7 @@ setup:
 	echo "\033[0;33m Setting up the project... \033[0m"
 	cp phpstan.dist.neon phpstan.neon
 	cp phpunit.xml.dist phpunit.xml
+	cp behat.yml.dist behat.yml
 	make start-container
 	docker compose exec php composer install
 	docker compose exec php bin/console doctrine:migrations:migrate
@@ -40,9 +42,13 @@ test-unit:
 test-architecture:
 	php vendor/bin/phpstan analyse -c phpstan.neon
 
+test-behat:
+	APP_ENV=test vendor/bin/behat --strict --format progress
+
 test-all:
 	make test-architecture
 	make test-unit
+	make test-behat
 
 # Composer commands
 install-deps:
