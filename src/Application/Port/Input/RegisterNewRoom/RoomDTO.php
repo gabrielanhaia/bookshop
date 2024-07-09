@@ -5,7 +5,7 @@ namespace App\Application\Port\Input\RegisterNewRoom;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Uid\Uuid;
 
-class RoomDTO
+class RoomDTO implements \JsonSerializable
 {
     private ?Uuid $id = null;
 
@@ -47,5 +47,16 @@ class RoomDTO
     public function getId(): ?Uuid
     {
         return $this->id;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'studioId' => $this->studioId,
+            'name' => $this->name,
+            'capacity' => $this->capacity,
+            'equipments' => $this->equipments,
+        ];
     }
 }

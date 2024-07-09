@@ -65,9 +65,28 @@ class StudioMySQLRepository implements StudioRepositoryPort
 
     }
 
-    public function findStudioById(Uuid $getStudioId): ?StudioAggregate
+    public function findStudioById(Uuid $studioId): ?StudioAggregate
     {
-        return null;
+        $query = 'SELECT * FROM studios WHERE id = ?';
+        $stmt = $this->connection->prepare($query);
+        $stmtResult = $stmt->executeQuery([$studioId->toRfc4122()]);
+        $result = $stmtResult->fetchAssociative();
+
+        if ($result === false) {
+            return null;
+        }
+
+        return StudioAggregate::createWithId(
+            id: Uuid::fromString($result['id']),
+            name: $result['name'],
+            email: new Email($result['email']),
+            address: new Address(
+                street: $result['street'],
+                city: $result['city'],
+                zipCode: $result['zip_code'],
+                country: $result['country']
+            )
+        );
     }
 
     public function getAllStudios(): StudioDTOCollection

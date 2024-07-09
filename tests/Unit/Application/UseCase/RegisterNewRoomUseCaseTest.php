@@ -42,26 +42,6 @@ class RegisterNewRoomUseCaseTest extends AbstractTestCase
             ->registerNewRoom($this->createRoomDTO());
     }
 
-    public function testWhenRoomAlreadyExistsThenThrowException(): void
-    {
-        $this->expectException(ApplicationException::class);
-
-        $this->studioRepositoryPort
-            ->findStudioById(Uuid::fromString(self::STUDIO_ID))
-            ->shouldBeCalledOnce()
-            ->willReturn($this->createStudioAggregate());
-
-        $this->roomRepositoryPort
-            ->findRoomByName(self::ROOM_NAME)
-            ->shouldBeCalledOnce()
-            ->willReturn($this->createRoomEntity());
-
-        $this->roomRepositoryPort->saveRoom(Argument::any())->shouldNotBeCalled();
-
-        $this->createUseCase()
-            ->registerNewRoom($this->createRoomDTO());
-    }
-
     public function testSuccessfullyRegisterNewRoom(): void
     {
         $this->studioRepositoryPort

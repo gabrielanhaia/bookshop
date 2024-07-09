@@ -1,0 +1,10 @@
+### Register room to a studio
+POST {{url}}/rooms
+Content-Type: application/json
+
+{
+  "name": "Room 1",
+  "studioId": "019093d6-161b-7237-88e8-83e120ae98b8",
+  "capacity": 10,
+  "equipments": []
+}

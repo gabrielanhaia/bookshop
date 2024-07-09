@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Studio\Model;
 
+use App\Application\Port\Output\RoomRepositoryPort;
 use App\Domain\Studio\Model\ValueObject\Address;
 use App\Domain\Studio\Model\ValueObject\Capacity;
+use App\Shared\Exception\DomainException;
 use App\Shared\Model\ValueObject\Email;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Uid\Uuid;
@@ -50,16 +52,28 @@ class StudioAggregate
         return new self($id, $name, $email, $address, $rooms);
     }
 
+    /**
+     * @throws DomainException
+     */
     public function registerNewRoom(
         string $name,
         Capacity $capacity,
         ArrayCollection $equipments = null
     ): RoomEntity
     {
+        if ($this->roomExists($name)) {
+            throw new DomainException('Room already exists');
+        }
+
         $room = RoomEntity::create($this->id, $name, $capacity, $equipments);
         $this->addRoom($room);
 
         return $room;
+    }
+
+    private function roomExists(string $name): bool
+    {
+        return $this->rooms->filter(fn(RoomEntity $room) => $room->getName() === $name)->count() > 0;
     }
 
     public function getId(): Uuid

@@ -3,12 +3,12 @@ POST {{url}}/studios
 Content-Type: application/json
 
 {
-    "name": "Bier Studio",
-    "street": "Bierstrasse 2",
-    "city": "Berlin",
-    "zipCode": "54321",
-    "country": "DE",
-    "email": "contact@bierstudio.com"
+  "name": "Bier Studio",
+  "street": "Bierstrasse 2",
+  "city": "Berlin",
+  "zipCode": "54321",
+  "country": "DE",
+  "email": "contact@bierstudio.com"
 }
 
 ### Create a new Studio in Rome
@@ -17,12 +17,12 @@ POST {{url}}/studios
 Content-Type: application/json
 
 {
-    "name": "Colesseo Studio",
-    "street": "Via Colosseo 2",
-    "city": "Rome",
-    "zipCode": "54321",
-    "country": "IT",
-    "email": "contact@colesseiostudio.com"
+  "name": "Colesseo Studio",
+  "street": "Via Colosseo 2",
+  "city": "Rome",
+  "zipCode": "54321",
+  "country": "IT",
+  "email": "contact@colesseiostudio.com"
 }
 
 ### Create a new Studio in Paris
@@ -31,12 +31,12 @@ POST {{url}}/studios
 Content-Type: application/json
 
 {
-    "name": "Tour Eiffel Studio",
-    "street": "Rue de la Tour Eiffel 2",
-    "city": "Paris",
-    "zipCode": "54321",
-    "country": "FR",
-    "email": "contact@eiffelstudio.com"
+  "name": "Tour Eiffel Studio",
+  "street": "Rue de la Tour Eiffel 2",
+  "city": "Paris",
+  "zipCode": "54321",
+  "country": "FR",
+  "email": "contact@eiffelstudio.com"
 }
 
 ### It tries to register the same studio in Paris and it should return a conflict error = code 409

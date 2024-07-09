@@ -14,7 +14,7 @@ interface StudioRepositoryPort
 
     public function findStudioByName(string $name): ?StudioAggregate;
 
-    public function findStudioById(Uuid $getStudioId): ?StudioAggregate;
+    public function findStudioById(Uuid $studioId): ?StudioAggregate;
 
     public function getAllStudios(): StudioDTOCollection;
 }

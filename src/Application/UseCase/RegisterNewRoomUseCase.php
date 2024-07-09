@@ -10,7 +10,6 @@ use App\Application\Port\Input\RegisterNewRoom\RoomDTO;
 use App\Application\Port\Output\RoomRepositoryPort;
 use App\Application\Port\Output\StudioRepositoryPort;
 use App\Domain\Studio\Model\EquipmentEntity;
-use App\Domain\Studio\Model\RoomEntity;
 use App\Domain\Studio\Model\StudioAggregate;
 use App\Domain\Studio\Model\ValueObject\Capacity;
 use App\Shared\Exception\ApplicationException;
@@ -31,8 +30,6 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
     public function registerNewRoom(RoomDTO $roomDTO): RoomDTO
     {
         $studioAggregate = $this->getStudio($roomDTO);
-        $this->validateDuplicatedRooms($roomDTO);
-
         $room = $studioAggregate->registerNewRoom(
             name: $roomDTO->getName(),
             capacity: Capacity::create($roomDTO->getCapacity()),
@@ -55,17 +52,6 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
         }
 
         return $studioAggregate;
-    }
-
-    /**
-     * @throws ApplicationException If room already exists
-     */
-    private function validateDuplicatedRooms(RoomDTO $roomDTO): void
-    {
-        $room = $this->roomRepositoryPort->findRoomByName($roomDTO->getName());
-        if ($room !== null) {
-            throw new ApplicationException('Room already exists');
-        }
     }
 
     /**

@@ -93,6 +93,24 @@ class AbstractTestCase extends TestCase
         );
     }
 
+    protected function createStudioAggregateWithRoom(): StudioAggregate
+    {
+        $studio = $this->createStudioAggregate();
+        $studio->registerNewRoom(
+            name: self::ROOM_NAME,
+            capacity: Capacity::create(self::ROOM_CAPACITY),
+            equipments: new ArrayCollection([
+                EquipmentEntity::create(
+                    name: self::EQUIPMENT_NAME,
+                    type: EquipmentType::CAMERA,
+                    serialNumber: self::EQUIPMENT_SERIAL_NUMBER
+                )
+            ])
+        );
+
+        return $studio;
+    }
+
     protected function createRoomEntity(): RoomEntity
     {
         return RoomEntity::create(
