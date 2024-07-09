@@ -75,6 +75,10 @@ class RegisterNewStudioUseCaseTest extends AbstractTestCase
 
     private function createUseCase(): RegisterNewStudioUseCase
     {
-        return new RegisterNewStudioUseCase($this->studioRepositoryPort->reveal(), $this->studioFactory->reveal());
+        return new RegisterNewStudioUseCase(
+            $this->mockTransactionHandlerPort(),
+            $this->studioRepositoryPort->reveal(),
+            $this->studioFactory->reveal()
+        );
     }
 }

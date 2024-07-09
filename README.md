@@ -109,6 +109,7 @@ The main goal was to showcase code structure and organization using Hexagonal Ar
 
 ## Future Enhancements
 
+- **Object Mother**: Add Object Mother pattern to simplify test data creation for the tests. I really did not like the way that I implemented the methods in the AbstractTestCase for the unit tests that return the objects. But I would implement the https://martinfowler.com/bliki/ObjectMother.html. 
 - **Validations**: Add more validation and error handling. I really did not focus on this in the project.
 - **Communication between different layers**: Improve communication between layers, like using DTOs.
 - **OpenAPI Documentation**: The way I implemented works very well, but it can be improved to document objects and responses, and avoid code duplication. Also, I would add something like "Backstage" to render the documentation.

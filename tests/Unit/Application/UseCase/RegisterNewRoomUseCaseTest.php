@@ -92,6 +92,7 @@ class RegisterNewRoomUseCaseTest extends AbstractTestCase
     private function createUseCase(): RegisterNewRoomUseCase
     {
         return new RegisterNewRoomUseCase(
+            $this->mockTransactionHandlerPort(),
             $this->studioRepositoryPort->reveal(),
             $this->roomRepositoryPort->reveal(),
             $this->equipmentFactory->reveal()

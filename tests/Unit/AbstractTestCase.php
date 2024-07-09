@@ -6,16 +6,19 @@ namespace App\Tests\Unit;
 
 use App\Application\Port\Input\RegisterNewRoom\EquipmentDTO;
 use App\Application\Port\Input\RegisterNewRoom\RoomDTO;
+use App\Application\Port\Output\TransactionHandlerPort;
 use App\Application\Port\Shared\StudioDTO;
 use App\Domain\Studio\Model\EquipmentEntity;
 use App\Domain\Studio\Model\RoomEntity;
 use App\Domain\Studio\Model\StudioAggregate;
 use App\Domain\Studio\Model\ValueObject\Address;
 use App\Domain\Studio\Model\ValueObject\Capacity;
+use App\ObjectSpecification\Transaction\TransactionHandlerInterface;
 use App\Shared\Model\ValueObject\Email;
 use App\Shared\Model\ValueObject\EquipmentType;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Prophecy\Prophet;
 use Symfony\Component\Uid\Uuid;
 
@@ -49,6 +52,16 @@ class AbstractTestCase extends TestCase
     {
         parent::setUp();
         $this->prophet = new Prophet();
+    }
+
+    public function mockTransactionHandlerPort(): TransactionHandlerPort
+    {
+        $mock = $this->prophet->prophesize(TransactionHandlerPort::class);
+        $mock->execute(Argument::type('callable'))->will(function ($args) {
+            return $args[0]();
+        });
+
+        return $mock->reveal();
     }
 
     protected function createStudioDTO(): StudioDTO
