@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Studio\Model;
 
-use App\Application\Port\Output\RoomRepositoryPort;
 use App\Domain\Studio\Model\ValueObject\Address;
 use App\Domain\Studio\Model\ValueObject\Capacity;
 use App\Shared\Exception\DomainException;

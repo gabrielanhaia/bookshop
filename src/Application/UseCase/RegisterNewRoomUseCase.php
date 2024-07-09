@@ -4,28 +4,31 @@ declare(strict_types=1);
 
 namespace App\Application\UseCase;
 
-use App\Application\Port\Input\RegisterNewRoom\EquipmentDTO;
+use App\Application\Factory\EquipmentFactory;
 use App\Application\Port\Input\RegisterNewRoom\RegisterNewRoomPort;
 use App\Application\Port\Input\RegisterNewRoom\RoomDTO;
 use App\Application\Port\Output\RoomRepositoryPort;
 use App\Application\Port\Output\StudioRepositoryPort;
-use App\Domain\Studio\Model\EquipmentEntity;
 use App\Domain\Studio\Model\StudioAggregate;
 use App\Domain\Studio\Model\ValueObject\Capacity;
 use App\Shared\Exception\ApplicationException;
-use Doctrine\Common\Collections\ArrayCollection;
+use App\Shared\Exception\DomainException;
 
 class RegisterNewRoomUseCase implements RegisterNewRoomPort
 {
     public function __construct(
         private readonly StudioRepositoryPort $studioRepositoryPort,
-        private readonly RoomRepositoryPort $roomRepositoryPort
+        private readonly RoomRepositoryPort   $roomRepositoryPort,
+        private readonly EquipmentFactory     $equipmentFactory
     )
     {
     }
 
     /**
-     * @throws ApplicationException if studio not found or room already exists
+     * Register a new room in a studio
+     *
+     * @throws DomainException If studio not found
+     * @throws ApplicationException If studio not found
      */
     public function registerNewRoom(RoomDTO $roomDTO): RoomDTO
     {
@@ -33,7 +36,7 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
         $room = $studioAggregate->registerNewRoom(
             name: $roomDTO->getName(),
             capacity: Capacity::create($roomDTO->getCapacity()),
-            equipments: $this->formatEquipments($roomDTO),
+            equipments: $this->equipmentFactory->createEquipmentCollectionFromDTO($roomDTO->getEquipments())
         );
 
         $room = $this->roomRepositoryPort->saveRoom($room);
@@ -52,27 +55,5 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
         }
 
         return $studioAggregate;
-    }
-
-    /**
-     * @param RoomDTO $roomDTO
-     * @return ArrayCollection<EquipmentEntity>
-     */
-    private function formatEquipments(RoomDTO $roomDTO): ArrayCollection
-    {
-
-        $equipments = new ArrayCollection();
-        /** @var EquipmentDTO $equipment */
-        foreach ($roomDTO->getEquipments() as $equipment) {
-            $equipments->add(
-                EquipmentEntity::create(
-                    name: $equipment->getName(),
-                    type: $equipment->getType(),
-                    serialNumber: $equipment->getSerialNumber()
-                )
-            );
-        }
-
-        return $equipments;
     }
 }

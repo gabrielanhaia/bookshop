@@ -3,6 +3,7 @@
 namespace App\Tests\Unit\Application\UseCase;
 
 use App\Application\Exception\StudioAlreadyExistsException;
+use App\Application\Factory\StudioFactory;
 use App\Application\Port\Output\StudioRepositoryPort;
 use App\Application\UseCase\RegisterNewStudioUseCase;
 use App\Domain\Studio\Model\StudioAggregate;
@@ -15,11 +16,14 @@ class RegisterNewStudioUseCaseTest extends AbstractTestCase
 {
     private StudioRepositoryPort|ObjectProphecy|null $studioRepositoryPort;
 
+    private StudioFactory|ObjectProphecy|null $studioFactory;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->studioRepositoryPort = $this->prophet->prophesize(StudioRepositoryPort::class);
+        $this->studioFactory = $this->prophet->prophesize(StudioFactory::class);
     }
 
     public function testWhenStudioAlreadyExists(): void
@@ -40,10 +44,16 @@ class RegisterNewStudioUseCaseTest extends AbstractTestCase
      */
     public function testRegisterNewStudio(): void
     {
+        $studioDTO = $this->createStudioDTO();
         $this->studioRepositoryPort
             ->findStudioByName(self::STUDIO_NAME)
             ->shouldBeCalledOnce()
             ->willReturn(null);
+
+        $this->studioFactory
+            ->createStudioAggregateFromDTO($studioDTO)
+            ->shouldBeCalledOnce()
+            ->willReturn($this->createStudioAggregate());
 
         $studioAggregate = $this->createStudioAggregate();
         $this->studioRepositoryPort
@@ -59,12 +69,12 @@ class RegisterNewStudioUseCaseTest extends AbstractTestCase
             ->willReturn($studioAggregate);
 
         $useCase = $this->createUseCase();
-        $studioDTO = $useCase->registerNewStudio($this->createStudioDTO());
-        $this->assertInstanceOf(Uuid::class, $studioDTO->getId());
+        $result = $useCase->registerNewStudio($studioDTO);
+        $this->assertInstanceOf(Uuid::class, $result->getId());
     }
 
     private function createUseCase(): RegisterNewStudioUseCase
     {
-        return new RegisterNewStudioUseCase($this->studioRepositoryPort->reveal());
+        return new RegisterNewStudioUseCase($this->studioRepositoryPort->reveal(), $this->studioFactory->reveal());
     }
 }
