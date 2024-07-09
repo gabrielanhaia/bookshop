@@ -1,0 +1,67 @@
+openapi: 3.0.0
+info:
+  title: 'Dancing Studios API'
+  version: '0.1'
+paths:
+  /studios:
+    get:
+      tags:
+        - Studio
+      operationId: 78671e94602baa0b6dadc3486a88ac77
+      responses:
+        '200':
+          description: 'List of studios'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { id: { type: string, format: uuid }, name: { type: string }, street: { type: string }, city: { type: string }, zipCode: { type: string }, country: { type: string }, email: { type: string, format: email } }
+                  type: object
+    post:
+      tags:
+        - Studio
+      operationId: 89dfb79aaac02add10c68e48961b6b9a
+      requestBody:
+        description: 'Studio data'
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+                - name
+                - street
+                - city
+                - zipCode
+                - country
+                - email
+              properties:
+                name:
+                  type: string
+                street:
+                  type: string
+                city:
+                  type: string
+                zipCode:
+                  type: string
+                country:
+                  type: string
+                email:
+                  type: string
+                  format: email
+              type: object
+      responses:
+        '201':
+          description: 'Studio created'
+          content:
+            application/json:
+              schema:
+                properties:
+                  id: { type: string, format: uuid }
+                type: object
+        '409':
+          description: 'Studio already exists'
+tags:
+  -
+    name: Studio
+    description: Studio

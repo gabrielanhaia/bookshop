@@ -65,3 +65,6 @@ migrate:
 
 cs-fix:
 	php vendor/bin/php-cs-fixer fix
+
+api-docs:
+	php vendor/bin/openapi src -o docs/opeanapi.yaml
