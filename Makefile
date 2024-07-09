@@ -13,6 +13,7 @@ help:
 	@echo "\033[0;31m  test-all\033[0m         Run all the tests"
 	@echo "\033[0;31m  install-deps\033[0m     Install the dependencies"
 	@echo "\033[0;31m  clear\033[0m            Clear the cache"
+	@echo "\033[0;31m  cs-fix\033[0m           Fix the code style"
 	@echo "\033[0;31m  migrate\033[0m          Run the migrations"
 
 # Setup (run this command after cloning the project)
@@ -21,7 +22,7 @@ setup:
 	cp phpstan.dist.neon phpstan.neon
 	cp phpunit.xml.dist phpunit.xml
 	cp behat.yml.dist behat.yml
-	cp php-cs-fixer.dist.php .php-cs-fixer.php
+	cp .php-cs-fixer.dist.php .php-cs-fixer.php
 	make start-container
 	docker compose exec php composer install
 	docker compose exec php bin/console doctrine:migrations:migrate
@@ -61,3 +62,6 @@ clear:
 
 migrate:
 	php bin/console doctrine:migrations:migrate
+
+cs-fix:
+	php vendor/bin/php-cs-fixer fix

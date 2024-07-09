@@ -8,6 +8,7 @@ services:
       target: php
     volumes:
       - .:/var/www/html
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     networks:
       - app-network
 
@@ -40,14 +41,6 @@ services:
       - ./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
-    networks:
-      - app-network
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
     networks:
       - app-network
 
