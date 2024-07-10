@@ -83,6 +83,9 @@ This project demonstrates Hexagonal Architecture (ports and adapters). The goal 
   - Uses Docker Compose to manage multiple containers.
   - Includes a `Makefile` with common commands for setup, testing, and development.
 
+- **Database**:
+    - As explained that I am focusing on the Hexagonal Architecture, I decided not to even use the ORM (Doctrine for example) for persisting the Doctrine Entities. What I wanted to show is just the correct separation of concerns and how to test the domain logic. But I could use the ORM to persist the data easily, and We could even implement a different Output Adapter for that. It would be just plug and play.
+
 ### Benefits and Considerations
 
 - **Benefits**:
