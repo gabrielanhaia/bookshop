@@ -47,12 +47,17 @@ jobs:
       - name: Run migrations
         run: docker-compose exec -T php make migrate
 
-      - name: Run commands inside PHP container
-        run: |
-          docker-compose exec -T php php vendor/bin/php-cs-fixer check --using-cache=no
-          docker-compose exec -T php make test-architecture
-          docker-compose exec -T php make test-unit
-          docker-compose exec -T php make test-behat
+      - name: CS Fixer
+        run: docker-compose exec -T php php vendor/bin/php-cs-fixer fix --using-cache=no
+
+      - name: Architecture tests
+        run: docker-compose exec -T php make test-architecture
+
+      - name: Unit tests
+        run: docker-compose exec -T php make test-unit
+
+      - name: Behat tests
+        run: docker-compose exec -T php make test-behat
 
       - name: Tear down Docker Compose
         run: docker-compose down
