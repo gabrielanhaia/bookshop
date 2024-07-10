@@ -56,6 +56,10 @@ This project demonstrates Hexagonal Architecture (ports and adapters). The goal 
 
 ### Key Points
 
+- **CI/CD**:
+  - Uses GitHub Actions for continuous integration.
+  - Runs tests and checks code quality on every push to the `main` branch.
+
 - **Hexagonal Architecture**:
   - Separates core logic from external systems.
   - Makes it easy to replace external components without changing core logic.
@@ -119,5 +123,4 @@ The main goal was to showcase code structure and organization using Hexagonal Ar
 - **Expand Domain**: Add features like user management, notifications, and reporting.
 - **Optimize Performance**: Improve the application's performance and scalability.
 - **More examples with some message based communication**: I would like to show how to use messages (RabbitMQ or Kafka) to communicate between different services, and re-use the same domain logic.
-- **CI/CD Pipeline**: Implement a CI/CD pipeline to automate testing and deployment. Maybe use some GitHub Actions.
 - **Monitoring and Logging**: Add monitoring and logging to track application performance and errors.
