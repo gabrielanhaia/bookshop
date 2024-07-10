@@ -17,14 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Pre CI Setup Outside Container
+        run: make pre-ci-setup
+
       - name: Set up Docker Compose
         run: docker-compose up -d
 
       - name: Wait for services to be ready
         run: sleep 30
 
-      - name: Run Make CI Setup Inside Container
-        run: docker-compose exec -T --user www-data php make ci-setup
+      - name: Run CI Inside Container
+        run: docker-compose exec -T php make ci
 
       - name: Run commands inside PHP container
         run: |
