@@ -13,7 +13,6 @@ use App\Domain\Studio\Model\RoomEntity;
 use App\Domain\Studio\Model\StudioAggregate;
 use App\Domain\Studio\Model\ValueObject\Address;
 use App\Domain\Studio\Model\ValueObject\Capacity;
-use App\ObjectSpecification\Transaction\TransactionHandlerInterface;
 use App\Shared\Model\ValueObject\Email;
 use App\Shared\Model\ValueObject\EquipmentType;
 use Doctrine\Common\Collections\ArrayCollection;
