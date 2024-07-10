@@ -20,40 +20,20 @@ jobs:
       - name: Set up Docker Compose
         run: docker-compose up -d
 
-      - name: Run Make Setup
+      - name: Wait for services to be ready
+        run: sleep 30
+
+      - name: Run Make Setup Outside Container
         run: make setup
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1.10'
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
-
-      - name: Cache Composer packages
-        id: composer-cache
-        uses: actions/cache@v3
-        with:
-          path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
-
-      - name: Code check (CS-Fixer)
-        run: php vendor/bin/php-cs-fixer check
-
-      - name: Run Architecture tests
-        run: make test-architecture
-
-      - name: Run Unit tests
-        run: make test-unit
-
-      - name: Run Behat tests
-        run: make test-behat
+      - name: Run commands inside PHP container
+        run: |
+          docker-compose exec -T php composer validate --strict
+          docker-compose exec -T php composer install --prefer-dist --no-progress
+          docker-compose exec -T php php vendor/bin/php-cs-fixer check
+          docker-compose exec -T php make test-architecture
+          docker-compose exec -T php make test-unit
+          docker-compose exec -T php make test-behat
 
       - name: Tear down Docker Compose
         run: docker-compose down
