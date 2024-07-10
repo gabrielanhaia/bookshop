@@ -24,7 +24,7 @@ jobs:
         run: sleep 30
 
       - name: Run Make CI Setup Inside Container
-        run: docker-compose exec -T php make ci-setup
+        run: docker-compose exec -T --user www-data php make ci-setup
 
       - name: Run commands inside PHP container
         run: |
