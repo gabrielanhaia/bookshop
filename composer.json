@@ -1,5 +1,6 @@
 {
     "name": "gabrielanhaia/studio-renting",
+    "description": "Studio Renting - Application to manage the renting of studios.",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
