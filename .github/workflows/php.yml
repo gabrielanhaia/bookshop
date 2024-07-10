@@ -38,5 +38,18 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
+      - name: Check CS-Fixer
+        run: php vendor/bin/php-cs-fixer fix --dry-run --diff --diff-format=udiff --verbose
+
+  tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Run Architecture tests
+        run: make test-architecture
+
       - name: Run Unit tests
         run: make test-unit
+
+      - name: Run Behat tests
+        run: make test-behat
