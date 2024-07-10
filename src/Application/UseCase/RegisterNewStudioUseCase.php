@@ -17,8 +17,7 @@ class RegisterNewStudioUseCase implements RegisterNewStudioPort
         private readonly TransactionHandlerPort $transactionHandlerPort,
         private readonly StudioRepositoryPort   $studioRepository,
         private readonly StudioFactory          $studioFactory
-    )
-    {
+    ) {
     }
 
     public function registerNewStudio(StudioDTO $studioDTO): StudioDTO

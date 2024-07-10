@@ -22,8 +22,7 @@ class StudioController extends AbstractController
         private readonly RegisterNewStudioPort $registerNewStudioPort,
         private readonly GetStudiosPort        $getStudiosPort,
         ValidatorInterface                     $validator,
-    )
-    {
+    ) {
         parent::__construct($validator);
     }
 
@@ -41,7 +40,7 @@ class StudioController extends AbstractController
                     new OA\Property(property: 'city', type: 'string'),
                     new OA\Property(property: 'zipCode', type: 'string'),
                     new OA\Property(property: 'country', type: 'string'),
-                    new OA\Property(property: 'email', type: 'string', format: 'email')
+                    new OA\Property(property: 'email', type: 'string', format: 'email'),
                 ],
                 type: 'object'
             )
@@ -61,7 +60,7 @@ class StudioController extends AbstractController
             new OA\Response(
                 response: 409,
                 description: 'Studio already exists',
-            )
+            ),
         ]
     )]
     public function handle(Request $request): Response
@@ -104,12 +103,12 @@ class StudioController extends AbstractController
                             new OA\Property(property: 'city', type: 'string'),
                             new OA\Property(property: 'zipCode', type: 'string'),
                             new OA\Property(property: 'country', type: 'string'),
-                            new OA\Property(property: 'email', type: 'string', format: 'email')
+                            new OA\Property(property: 'email', type: 'string', format: 'email'),
                         ],
                         type: 'object'
                     )
                 )
-            )
+            ),
         ]
     )]
     public function getStudios(): Response

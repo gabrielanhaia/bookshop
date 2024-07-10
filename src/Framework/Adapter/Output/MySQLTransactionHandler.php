@@ -8,7 +8,6 @@ use Doctrine\DBAL\Exception;
 
 class MySQLTransactionHandler implements TransactionHandlerPort
 {
-
     public function __construct(private readonly Connection $connection)
     {
     }

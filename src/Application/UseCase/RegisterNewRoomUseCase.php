@@ -22,8 +22,7 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
         private readonly StudioRepositoryPort   $studioRepositoryPort,
         private readonly RoomRepositoryPort     $roomRepositoryPort,
         private readonly EquipmentFactory       $equipmentFactory
-    )
-    {
+    ) {
     }
 
     /**
@@ -42,7 +41,6 @@ class RegisterNewRoomUseCase implements RegisterNewRoomPort
 
             return $roomDTO->setId($room->getId());
         });
-
     }
 
     /**

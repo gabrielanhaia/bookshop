@@ -38,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Check CS-Fixer
+      - name: Code check (CS-Fixer)
         run: php vendor/bin/php-cs-fixer check
 
   tests:

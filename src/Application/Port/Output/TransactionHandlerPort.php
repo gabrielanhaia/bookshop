@@ -11,5 +11,4 @@ interface TransactionHandlerPort
     public function commit(): void;
 
     public function rollback(): void;
-
 }
