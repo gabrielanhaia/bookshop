@@ -12,12 +12,16 @@ permissions:
 
 jobs:
   build:
-
-    name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Docker Compose
+        run: docker-compose up -d
+
+      - name: Run Make Setup
+        run: make setup
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
@@ -50,3 +54,6 @@ jobs:
 
       - name: Run Behat tests
         run: make test-behat
+
+      - name: Tear down Docker Compose
+        run: docker-compose down

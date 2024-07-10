@@ -61,7 +61,7 @@ clear:
 	php bin/console cache:clear
 
 migrate:
-	php bin/console doctrine:migrations:migrate
+	php bin/console doctrine:migrations:migrate --no-interaction
 
 cs-fix:
 	php vendor/bin/php-cs-fixer fix
