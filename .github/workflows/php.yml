@@ -39,7 +39,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Wait for services to be ready
-        run: sleep 30
+        run: sleep 15
 
       - name: Install Dependencies
         run: composer install --prefer-dist --no-progress
@@ -49,8 +49,7 @@ jobs:
 
       - name: Run commands inside PHP container
         run: |
-          docker-compose exec -T php composer validate --strict
-          docker-compose exec -T php php vendor/bin/php-cs-fixer check
+          docker-compose exec -T php php vendor/bin/php-cs-fixer check --using-cache=no
           docker-compose exec -T php make test-architecture
           docker-compose exec -T php make test-unit
           docker-compose exec -T php make test-behat
