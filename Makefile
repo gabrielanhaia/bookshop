@@ -27,6 +27,14 @@ setup:
 	docker compose exec php composer install
 	docker compose exec php bin/console doctrine:migrations:migrate
 
+ci-setup:
+	cp phpstan.dist.neon phpstan.neon
+	cp phpunit.xml.dist phpunit.xml
+	cp behat.yml.dist behat.yml
+	cp .php-cs-fixer.dist.php .php-cs-fixer.php
+	make install-deps
+	make migrate
+
 # Docker commands
 start-container:
 	docker-compose up -d

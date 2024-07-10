@@ -23,15 +23,8 @@ jobs:
       - name: Wait for services to be ready
         run: sleep 30
 
-      - name: Create vendor directory and set permissions
-        run: |
-          mkdir -p vendor
-          chmod -R 775 vendor
-          docker-compose exec -T php mkdir -p /var/www/html/vendor
-          docker-compose exec -T php chmod -R 775 /var/www/html/vendor
-
-      - name: Run Make Setup Outside Container
-        run: make setup
+      - name: Run Make CI Setup Inside Container
+        run: docker-compose exec -T php make ci-setup
 
       - name: Run commands inside PHP container
         run: |
