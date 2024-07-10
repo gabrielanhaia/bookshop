@@ -39,7 +39,7 @@ jobs:
         run: composer install --prefer-dist --no-progress
 
       - name: Check CS-Fixer
-        run: php vendor/bin/php-cs-fixer check --dry-run --diff
+        run: php vendor/bin/php-cs-fixer check
 
   tests:
     runs-on: ubuntu-latest
