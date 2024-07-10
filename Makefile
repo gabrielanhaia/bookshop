@@ -33,10 +33,6 @@ pre-ci-setup:
 	cp behat.yml.dist behat.yml
 	cp .php-cs-fixer.dist.php .php-cs-fixer.php
 
-ci:
-	make install-deps
-	make migrate
-
 # Docker commands
 start-container:
 	docker-compose up -d
