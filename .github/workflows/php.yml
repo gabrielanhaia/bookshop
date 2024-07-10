@@ -17,6 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, intl, xdebug
+          ini-values: |
+            memory_limit=2G
+          coverage: xdebug
+
+      - name: Install Composer
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          php -r "unlink('composer-setup.php');"
+
       - name: Pre CI Setup Outside Container
         run: make pre-ci-setup
 
@@ -26,17 +41,15 @@ jobs:
       - name: Wait for services to be ready
         run: sleep 30
 
-      - name: Install Composer
-        run: |
-          docker-compose exec -T php composer install --prefer-dist --no-progress
+      - name: Install Dependencies
+        run: composer install --prefer-dist --no-progress
 
       - name: Run migrations
-        run: docker-compose exec -T php php bin/console doctrine:migrations:migrate --no-interaction
+        run: docker-compose exec -T php make migrate
 
       - name: Run commands inside PHP container
         run: |
           docker-compose exec -T php composer validate --strict
-          docker-compose exec -T php composer install --prefer-dist --no-progress
           docker-compose exec -T php php vendor/bin/php-cs-fixer check
           docker-compose exec -T php make test-architecture
           docker-compose exec -T php make test-unit
