@@ -1,5 +1,8 @@
 # Dancing Studios
 
+![image](https://github.com/gabrielanhaia/studio-renting/assets/15172908/585d9c50-2ceb-4c10-aede-12150bab4607)
+
+
 ## How to Start and Test the Project
 
 ### Requirements
@@ -28,7 +31,7 @@ make enter-container
 
 There are some files inside `./docs/HttpAPI/` that you can use the .http files to test the API via REST Client in IntelliJ IDEA, VS Code, etc. 
 
-## Running Tests
+## Running Tests (I recommend running all the make commands inside the container to avoid incompatibilities in different environments)
 
 You can run the tests as needed:
 
@@ -97,7 +100,7 @@ This project was inspired by a relative's work in opening and managing dance stu
 - **Studio**: Represents a dance studio with details like name, address, and contact info.
 - **Room**: Represents a room within a studio, including its name, capacity, and equipment.
 - **Equipment**: Represents items in a room, like sound systems and mirrors.
-- **Appointment**: Represents bookings or events scheduled in a room.
+- **Appointment**: Represents bookings or events scheduled in a room. (Not implemented
 
 ## Implementation
 
