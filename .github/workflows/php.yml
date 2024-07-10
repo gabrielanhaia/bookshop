@@ -26,6 +26,9 @@ jobs:
       - name: Run Make Setup Outside Container
         run: make setup
 
+      - name: Adjust permissions
+        run: docker-compose exec -T php chown -R www-data:www-data /var/www/html
+
       - name: Run commands inside PHP container
         run: |
           docker-compose exec -T php composer validate --strict
